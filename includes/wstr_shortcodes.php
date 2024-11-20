@@ -23,9 +23,6 @@ class wstr_shortcodes
         add_shortcode('wstr_cart_page', [$this, 'wstr_cart_page']);
         add_shortcode('wstr_payment_success_page', [$this, 'wstr_payment_success_page']);
         // Initialize Stripe in constructor
-        require_once get_template_directory() . '/stripe-php/init.php';
-
-        $this->stripe = new \Stripe\StripeClient('sk_test_519GhuXJEJBPvvIYosOMtDopHM7WQQ00WMlsdhzrcrnU7IMfNbUaLRpdo7GBPYa45gqakKowzxuZiwjRzvtpJk0PN00HpuJgZOr');
     }
 
     public function wstr_banner_reviews_function()
