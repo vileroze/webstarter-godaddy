@@ -1137,43 +1137,42 @@ class wstr_shortcodes
                     $cart_items = wstr_retrieve_cart_items();
 
                     if (!empty($cart_items)) {
-
                         foreach ($cart_items as $item) {
                             $installment_duration = '';
                             if ($item['payment_option'] == 'installment') {
                                 $installment_duration = '/' . $item['installment_duration'] . ' months';
                             }
                             echo '
-                            <div class="cart-item">
-                                <img src="' . $item['image'] . '" alt="' . $item['title'] . '">
-                                <div class="cart-item-details">
-                                    <p>' . $item['title'] . '</p>
-                                    <p>' . $item['currency'] . $item['price'] . '</p>
-                                    <p>' . $item['payment_option'] . $installment_duration . '</p>
-                                </div>
-                                <button class="remove-from-cart-btn" data-product-id="' . $item['id'] . '">REMOVE</button>
-                            </div>';
+                    <div class="cart-item">
+                        <img src="' . $item['image'] . '" alt="' . $item['title'] . '">
+                        <div class="cart-item-details">
+                            <p>' . $item['title'] . '</p>
+                            <p>' . $item['currency'] . $item['price'] . '</p>
+                            <p>' . $item['payment_option'] . $installment_duration . '</p>
+                        </div>
+                        <button class="remove-from-cart-btn" data-product-id="' . $item['id'] . '">REMOVE</button>
+                    </div>';
                         }
                     }
                     ?>
                 </div>
             </div>
-            <div id="payment-element">
-                <!--Stripe.js injects the Payment Element-->
+
+            <!-- GoDaddy Payment Form Container -->
+            <div id="gdpay-container">
+                <!-- Email field for guest users will be injected here by JavaScript -->
+                <div id="payment-element">
+                    <!-- GoDaddy Payment form will be injected here -->
+                </div>
+                <div id="card-errors" class="gdpay-error hidden"></div>
             </div>
-            <button id="submit">
+
+            <button id="submit" class="gdpay-button">
                 <div class="spinner hidden" id="spinner"></div>
                 <span id="button-text">Pay now</span>
             </button>
             <div id="payment-message" class="hidden"></div>
         </form>
-        <!-- [DEV]: For demo purposes only, display dynamic payment methods annotation and integration checker -->
-        <div id="dpm-annotation">
-            <p>
-                Payment methods are dynamically displayed based on customer location, order amount, and currency.&nbsp;
-                <a href="#" target="_blank" rel="noopener noreferrer" id="dpm-integration-checker">Preview payment methods by transaction</a>
-            </p>
-        </div>
     <?php
         return ob_get_clean();
     }
